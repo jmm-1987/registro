@@ -35,6 +35,7 @@ class Empleado(db.Model):  # Cambiado de db.Base a db.Model
     activo = db.Column(db.Boolean, nullable=False)
 
 
+
 class Registro(db.Model):  # Cambiado de db.Base a db.Model
     __tablename__ = "registro"
     id = db.Column(db.Integer, primary_key=True)
@@ -44,3 +45,20 @@ class Registro(db.Model):  # Cambiado de db.Base a db.Model
     tipo = db.Column(db.String, db.CheckConstraint("tipo IN ('Trabajo', 'Vacaciones', 'Ausencia', 'Baja')", name='check_tipo'), nullable=False)
 
     empleado = db.relationship('Empleado', backref=db.backref('registros', lazy=True))
+
+
+class Foto(db.Model):
+    __tablename__ = 'foto'
+
+    id = db.Column(db.Integer, primary_key=True)
+    empleado = db.Column(db.String(255), nullable=False)
+    nombre_archivo = db.Column(db.String(255), nullable=False)
+    ruta = db.Column(db.String(255), nullable=False)
+
+class Documento(db.Model):
+    __tablename__ = 'documento'
+
+    id = db.Column(db.Integer, primary_key=True)
+    empleado = db.Column(db.String(255), nullable=False)
+    nombre_archivo = db.Column(db.String(255), nullable=False)
+    ruta = db.Column(db.String(255), nullable=False)

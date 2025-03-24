@@ -119,6 +119,33 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+        .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;  /* Tamaño de fuente para el texto */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn i {
+        font-size: 1.4rem; /* Ajuste del tamaño del ícono */
+        margin-right: 8px;  /* Espacio entre el ícono y el texto */
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+
+    .btn:focus {
+        outline: none;
+    }
     </style>
 </head>
 <body>
@@ -160,8 +187,11 @@
         <td>{{ empleado.cargo }}</td>
         <td>{{ empleado.sede }}</td>
         <td>
-            <button class="btn edit-btn">Editar</button>
-        </td>
+                <!-- Enlace que redirige a la página de edición pasando el id del empleado -->
+                <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn">
+    <i class="fas fa-pencil-alt"></i> <!-- Ícono de lápiz de Font Awesome -->
+</a>
+            </td>
     </tr>
     {% endfor %}
 </tbody>

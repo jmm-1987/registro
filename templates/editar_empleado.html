@@ -2,33 +2,58 @@
 <div class="form-container">
     <h2>Editar Empleado</h2>
     <form id="editEmpleadoForm" method="POST" action="{{ url_for('editar_empleado', id=empleado.id) }}">
-        <div class="form-group">
-            <label for="editNombre">Nombre Completo</label>
-            <input type="text" id="editNombre" name="nombre_completo" value="{{ empleado.nombre_completo }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editAlias">Alias</label>
-            <input type="text" id="editAlias" name="alias" value="{{ empleado.alias }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editCargo">Cargo</label>
-            <input type="text" id="editCargo" name="cargo" value="{{ empleado.cargo }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editSede">Sede</label>
-            <input type="text" id="editSede" name="sede" value="{{ empleado.sede }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editDni">DNI</label>
-            <input type="text" id="editDni" name="dni" value="{{ empleado.dni }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editEmail">Email</label>
-            <input type="email" id="editEmail" name="email" value="{{ empleado.email }}" required>
-        </div>
-        <div class="form-group">
-            <label for="editFechaAlta">Fecha Alta</label>
-            <input type="date" id="editFechaAlta" name="fecha_alta" value="{{ empleado.fecha_alta.strftime('%Y-%m-%d') }}" required>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="editNombre">Nombre Completo</label>
+                <input type="text" id="editNombre" name="nombre_completo" value="{{ empleado.nombre_completo }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editAlias">Alias</label>
+                <input type="text" id="editAlias" name="alias" value="{{ empleado.alias }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editCargo">Cargo</label>
+                <input type="text" id="editCargo" name="cargo" value="{{ empleado.cargo }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editSede">Sede</label>
+                <select id="editSede" name="sede" required>
+                    <option value="Merida" {% if empleado.sede == 'Merida' %}selected{% endif %}>Merida</option>
+                    <option value="Navalmoral" {% if empleado.sede == 'Navalmoral' %}selected{% endif %}>Navalmoral</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="editDni">DNI</label>
+                <input type="text" id="editDni" name="dni" value="{{ empleado.dni }}">
+            </div>
+            <div class="form-group">
+                <label for="editSeguridadSocial">Seguridad Social</label>
+                <input type="text" id="editSeguridadSocial" name="seguridad_social" value="{{ empleado.seguridad_social }}">
+            </div>
+            <div class="form-group">
+                <label for="editTelefono">Teléfono</label>
+                <input type="text" id="editTelefono" name="telefono" value="{{ empleado.telefono }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editEmail">Email</label>
+                <input type="email" id="editEmail" name="email" value="{{ empleado.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editSabados">Trabaja los Sábados</label>
+                <input type="checkbox" id="editSabados" name="sabados" {% if empleado.sabados %}checked{% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="editActivo">Empleado Activo</label>
+                <input type="checkbox" id="editActivo" name="activo" {% if empleado.activo %}checked{% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="editFechaAlta">Fecha Alta</label>
+                <input type="date" id="editFechaAlta" name="fecha_alta" value="{{ empleado.fecha_alta.strftime('%Y-%m-%d') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="editFechaBaja">Fecha Baja</label>
+                <input type="date" id="editFechaBaja" name="fecha_baja" value="{{ empleado.fecha_baja.strftime('%Y-%m-%d') if empleado.fecha_baja else '' }}">
+            </div>
         </div>
         <button type="submit" class="btn">Guardar Cambios</button>
     </form>
@@ -41,8 +66,14 @@
         border-radius: 10px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
         margin: 40px auto;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 
     .form-group {
@@ -62,6 +93,10 @@
         border: 1px solid #ccc;
     }
 
+    .form-group input[type="checkbox"] {
+        width: auto;
+    }
+
     .btn {
         background-color: #4CAF50;
         color: white;
@@ -71,6 +106,7 @@
         font-size: 1rem;
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 100%;
     }
 
     .btn:hover {

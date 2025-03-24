@@ -16,7 +16,21 @@ def ruta_editar_empleado(app):
             empleado.cargo = request.form['cargo']
             empleado.sede = request.form['sede']
             empleado.dni = request.form['dni']
+            empleado.seguridad_social = request.form['seguridad_social']
+            empleado.telefono = request.form['telefono']
             empleado.email = request.form['email']
+            empleado.sabados = 'sabados' in request.form  # Check si el checkbox 'sabados' está seleccionado
+            empleado.activo = 'activo' in request.form  # Check si el checkbox 'activo' está seleccionado
+            # Convertir la cadena de fecha a un objeto datetime.date
+            fecha_alta_str = request.form['fecha_alta']
+            fecha_alta = datetime.strptime(fecha_alta_str, '%Y-%m-%d').date()
+            fecha_baja_str = request.form['fecha_baja']
+            fecha_baja = datetime.strptime(fecha_baja_str, '%Y-%m-%d').date()
+
+            # Si es un POST, actualizamos el empleado con los datos del formulario
+            empleado.dni = request.form['dni']
+            empleado.fecha_alta = fecha_alta  # Asignar el objeto date
+            empleado.fecha_baja = fecha_baja
 
             # Guardar los cambios en la base de datos
             db.session.commit()
