@@ -1,0 +1,80 @@
+<!-- Formulario para Editar Empleado -->
+<div class="form-container">
+    <h2>Editar Empleado</h2>
+    <form id="editEmpleadoForm" method="POST" action="{{ url_for('editar_empleado', id=empleado.id) }}">
+        <div class="form-group">
+            <label for="editNombre">Nombre Completo</label>
+            <input type="text" id="editNombre" name="nombre_completo" value="{{ empleado.nombre_completo }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editAlias">Alias</label>
+            <input type="text" id="editAlias" name="alias" value="{{ empleado.alias }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editCargo">Cargo</label>
+            <input type="text" id="editCargo" name="cargo" value="{{ empleado.cargo }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editSede">Sede</label>
+            <input type="text" id="editSede" name="sede" value="{{ empleado.sede }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editDni">DNI</label>
+            <input type="text" id="editDni" name="dni" value="{{ empleado.dni }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editEmail">Email</label>
+            <input type="email" id="editEmail" name="email" value="{{ empleado.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="editFechaAlta">Fecha Alta</label>
+            <input type="date" id="editFechaAlta" name="fecha_alta" value="{{ empleado.fecha_alta.strftime('%Y-%m-%d') }}" required>
+        </div>
+        <button type="submit" class="btn">Guardar Cambios</button>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        background-color: #fefefe;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin: 40px auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+</style>

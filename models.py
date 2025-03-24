@@ -30,7 +30,7 @@ class Empleado(db.Model):  # Cambiado de db.Base a db.Model
     telefono = db.Column(db.String(9), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     fecha_alta = db.Column(db.DateTime, nullable=False)
-    fecha_baja = db.Column(db.DateTime, nullable=False)
+    fecha_baja = db.Column(db.DateTime, nullable=True)
     sabados = db.Column(db.Boolean, nullable=False)
     activo = db.Column(db.Boolean, nullable=False)
 

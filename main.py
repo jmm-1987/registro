@@ -1,7 +1,12 @@
 from flask import Flask, render_template
 from models import db, Empleado, Registro
+from funciones.crear_empleado import ruta_crear_empleado
+from funciones.editar_empleado import ruta_editar_empleado
+
+
 
 app = Flask(__name__)
+
 
 # Configuración de la base de datos
 app.config['SECRET_KEY'] = '78587fgrtyth'
@@ -10,6 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Para evitar advertencias
 
 # Inicializar la extensión SQLAlchemy
 db.init_app(app)
+
+ruta_crear_empleado(app)
+ruta_editar_empleado(app)
 
 # Crear las tablas antes de iniciar la aplicación (manual)
 with app.app_context():

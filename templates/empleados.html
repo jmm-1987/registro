@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>
+    <!-- Incluir FontAwesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -38,7 +40,7 @@
             border-radius: 10px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 1000px;
+            max-width: 800px;
             padding: 40px;
         }
 
@@ -51,34 +53,24 @@
 
         table {
             width: 100%;
+            margin-bottom: 20px;
             border-collapse: collapse;
-        }
-
-        table th, table td {
-            padding: 12px 20px;
             text-align: left;
-            border-bottom: 1px solid #e5e5e5;
         }
 
-        table th {
-            background-color: #1e2a36;
-            color: #fff;
-            font-size: 1.1rem;
-            text-transform: uppercase;
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
         }
 
-        table td {
-            color: #555;
-            font-size: 1.05rem;
-        }
-
-        table tr:hover {
-            background-color: #f1f1f1;
+        th {
+            background-color: #4CAF50;
+            color: white;
         }
 
         .buttons {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 20px;
             margin-top: 30px;
         }
@@ -103,6 +95,30 @@
             outline: none;
         }
 
+        .form-container {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -111,6 +127,21 @@
     </header>
     <main>
         <h1>Lista de Empleados</h1>
+
+        <div class="buttons">
+    <!-- Botón para volver al inicio -->
+    <form action="{{ url_for('index') }}" method="get">
+        <button class="btn" type="submit">
+            <i class="fas fa-door-open"></i> Volver al Inicio
+        </button>
+    </form>
+
+    <!-- Botón para abrir el modal de crear empleado -->
+    <button class="btn" id="openModalCrearEmpleado">
+        <i class="fas fa-plus-circle"></i> Crear Empleado
+    </button>
+</div>
+        </br>
         <table>
             <thead>
                 <tr>
@@ -118,25 +149,50 @@
                     <th>Nombre Completo</th>
                     <th>Cargo</th>
                     <th>Sede</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for empleado in empleados %}
-                    <tr>
-                        <td>{{ empleado.alias }}</td>
-                        <td>{{ empleado.nombre_completo }}</td>
-                        <td>{{ empleado.cargo }}</td>
-                        <td>{{ empleado.sede }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+    {% for empleado in empleados %}
+    <tr class="empleado-row" data-id="{{ empleado.id }}" data-nombre="{{ empleado.nombre_completo }}" data-alias="{{ empleado.alias }}" data-cargo="{{ empleado.cargo }}" data-sede="{{ empleado.sede }}">
+        <td>{{ empleado.alias }}</td>
+        <td>{{ empleado.nombre_completo }}</td>
+        <td>{{ empleado.cargo }}</td>
+        <td>{{ empleado.sede }}</td>
+        <td>
+            <button class="btn edit-btn">Editar</button>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
         </table>
 
-        <div class="buttons">
-            <form action="{{ url_for('index') }}" method="get">
-                <button class="btn" type="submit">Volver al Inicio</button>
-            </form>
-        </div>
     </main>
+
+    {% include 'modal_crear_empleado.html' %}
+
+    <script>
+    // Obtener el modal y los botones
+    var modalCrearEmpleado = document.getElementById('modal_crear_empleado');
+    var openModalCrearBtn = document.getElementById('openModalCrearEmpleado');
+    var closeModalCrearBtn = document.getElementById('closeModalCrearBtn');
+
+    // Abrir el modal
+    openModalCrearBtn.onclick = function() {
+        modalCrearEmpleado.style.display = "block";
+    }
+
+    // Cerrar el modal
+    closeModalCrearBtn.onclick = function() {
+        modalCrearEmpleado.style.display = "none";
+    }
+
+    // Cerrar el modal si el usuario hace clic fuera del modal
+    window.onclick = function(event) {
+        if (event.target == modalCrearEmpleado) {
+            modalCrearEmpleado.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>

@@ -1,0 +1,224 @@
+<!-- Modal Structure -->
+<div id="modal_crear_empleado" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h1>Crear Nuevo Empleado</h1>
+        <form action="{{ url_for('crear_empleado') }}" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="alias">Alias:</label>
+                    <input type="text" id="alias" name="alias" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre_completo">Nombre Completo:</label>
+                    <input type="text" id="nombre_completo" name="nombre_completo" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="alias">Usuario:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre_completo">Contraseña:</label>
+                    <input type="text" id="password" name="password" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cargo">Cargo:</label>
+                    <input type="text" id="cargo" name="cargo" required>
+                </div>
+                <div class="form-group">
+                    <label for="sede">Sede:</label>
+                    <select id="sede" name="sede" required>
+                        <option value="Merida">Merida</option>
+                        <option value="Navalmoral">Navalmoral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni">
+                </div>
+                <div class="form-group">
+                    <label for="seguridad_social">Seguridad Social:</label>
+                    <input type="text" id="seguridad_social" name="seguridad_social">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sabados">Trabaja los Sábados:</label>
+                    <input type="checkbox" id="sabados" name="sabados">
+                </div>
+                <div class="form-group">
+                    <label for="activo">Empleado Activo:</label>
+                    <input type="checkbox" id="activo" name="activo" checked>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fecha_alta">Fecha de Alta:</label>
+                    <input type="date" id="fecha_alta" name="fecha_alta" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha_baja">Fecha de Baja:</label>
+                    <input type="date" id="fecha_baja" name="fecha_baja">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn">Crear Empleado</button>
+                <button type="button" class="btn" id="closeModalBtn">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Estilo para el modal -->
+<style>
+    /* Estilo para el modal */
+    .modal {
+        display: none; /* Inicialmente oculto */
+        position: fixed; /* Fija en la pantalla */
+        z-index: 1; /* Asegura que esté por encima de otros elementos */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Hacer scroll si es necesario */
+        background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
+        padding-top: 60px; /* Espacio de arriba */
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .form-group {
+        flex: 1 1 45%; /* Establece que cada input ocupe un 45% del espacio */
+        min-width: 200px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .form-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+    }
+
+    .buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin: 0 10px;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+
+    .btn:focus {
+        outline: none;
+    }
+</style>
+
+<!-- Script para abrir y cerrar el modal -->
+<script>
+    // Abre el modal con el id 'modal_crear_empleado'
+    document.getElementById('openModalBtn')?.addEventListener('click', function() {
+        document.getElementById('modal_crear_empleado').style.display = 'block';
+    });
+
+    // Cerrar el modal cuando se hace clic en el botón "Cancelar"
+    document.getElementById('closeModalBtn')?.addEventListener('click', function() {
+        document.getElementById('modal_crear_empleado').style.display = 'none';
+    });
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('modal_crear_empleado')) {
+            document.getElementById('modal_crear_empleado').style.display = 'none';
+        }
+    };
+</script>
