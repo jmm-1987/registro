@@ -6,6 +6,7 @@ from funciones.crear_empleado import ruta_crear_empleado
 from funciones.editar_empleado import ruta_editar_empleado
 from funciones.registrar_entrada import ruta_registrar_entrada
 from funciones.registrar_salida import ruta_registrar_salida
+from sqlalchemy.orm import joinedload
 
 app = Flask(__name__)
 
@@ -91,6 +92,15 @@ def empleados():
     # Obtener todos los empleados de la base de datos
     empleados_list = Empleado.query.all()  # Obtiene todos los empleados
     return render_template('empleados.html', empleados=empleados_list)
+
+@app.route('/consultar_horarios')
+@login_required
+def consultar_horarios():
+    empleados_list = Empleado.query.all()
+    registros = Registro.query.options(joinedload(Registro.empleado)).all()
+
+
+    return render_template('consultar_horarios.html', empleados=empleados_list, registros=registros)
 
 @app.route('/movil')
 @login_required

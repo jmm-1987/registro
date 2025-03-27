@@ -63,8 +63,6 @@
     }
 
     .btn {
-      background-color: #4CAF50;
-      color: white;
       padding: 14px 20px;
       border: none;
       border-radius: 30px;
@@ -77,8 +75,34 @@
     }
 
     .btn:hover {
-      background-color: #45a049;
       transform: scale(1.05);
+    }
+
+    .btn-entrada {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .btn-entrada:hover {
+      background-color: #45a049;
+    }
+
+    .btn-salida {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .btn-salida:hover {
+      background-color: #d32f2f;
+    }
+
+    .btn-manual {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    .btn-manual:hover {
+      background-color: #1976D2;
     }
 
     footer {
@@ -87,7 +111,6 @@
       margin-bottom: 10px;
     }
 
-    /* Flash messages */
     .flash {
       padding: 10px 20px;
       border-radius: 8px;
@@ -130,19 +153,19 @@
       {% if hora_entrada %}
         <div id="contador" style="font-size: 2rem; margin-bottom: 20px;">00:00:00</div>
         <form action="{{ url_for('registrar_salida') }}" method="post">
-          <button type="submit" class="btn">Registrar Salida</button>
+          <button type="submit" class="btn btn-salida">Registrar Salida</button>
         </form>
       {% else %}
         <form action="{{ url_for('registrar_entrada') }}" method="post">
           <input type="hidden" name="tipo" value="Trabajo">
-          <button type="submit" class="btn">Registrar Entrada</button>
+          <button type="submit" class="btn btn-entrada">Registrar Entrada</button>
         </form>
       {% endif %}
     </div>
 
     <footer>
       <form action="{{ url_for('logout') }}" method="get">
-        <button type="submit" class="btn">Registro Manual</button>
+        <button type="submit" class="btn btn-manual">Registro Manual</button>
       </form>
     </footer>
   </div>
@@ -175,3 +198,4 @@
     </script>
   {% endif %}
 </body>
+</html>

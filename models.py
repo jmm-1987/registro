@@ -74,7 +74,8 @@ class Registro(db.Model):  # Cambiado de db.Base a db.Model
     fecha_hora_salida = db.Column(db.DateTime, nullable=True)
     tipo = db.Column(db.String, db.CheckConstraint("tipo IN ('Trabajo', 'Vacaciones', 'Ausencia', 'Baja')", name='check_tipo'), nullable=False)
 
-    empleado = db.relationship('Empleado', backref=db.backref('registros', lazy=True))
+    #empleado = db.relationship('Empleado', backref=db.backref('registros', lazy=True))
+    empleado = db.relationship('Empleado', backref='registros')
 
 
 class Foto(db.Model):
