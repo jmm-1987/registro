@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from models import db, Empleado
+from models import db, Empleado, Usuario
 from datetime import datetime
 
 app = Flask(__name__)
@@ -53,7 +53,13 @@ def ruta_crear_empleado(app):
                 activo= True
             )
 
+            nuevo_usuario = Usuario(
+                username=usuario,
+                password=password
+            )
+
             # Guardar el empleado en la base de datos
+            db.session.add(nuevo_usuario)
             db.session.add(nuevo_empleado)
             db.session.commit()
 

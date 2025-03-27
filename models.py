@@ -1,14 +1,44 @@
-
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 # Usamos una única instancia de SQLAlchemy
 db = SQLAlchemy()
 
-class Usuario(db.Model):  # Cambiado de db.Base a db.Model
-    __tablename__ = "usuario"
+
+class Usuario(UserMixin, db.Model):
+    __tablename__ = 'usuario'
+
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
+    # Métodos requeridos por Flask-Login:
+
+    def is_active(self):
+        return True  # Si deseas que todos los usuarios estén activos
+
+    def get_id(self):
+        return str(self.id)  # Asegúrate de devolver el id como cadena
+
+    def is_authenticated(self):
+        return True  # Si el usuario está autenticado, devuelve True
+
+    def is_anonymous(self):
+        return False  # Si el usuario no es anónimo, devuelve False
+
+    def check_password(self, password):
+        """Método para comprobar la contraseña del usuario."""
+        return check_password_hash(self.password, password)
+
+    # Método para crear un nuevo usuario
+    @staticmethod
+    def create_user(username, password):
+        hashed_password = generate_password_hash(password)
+        new_user = Usuario(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user
 
     def __init__(self, username, password):
         self.username = username
@@ -41,7 +71,7 @@ class Registro(db.Model):  # Cambiado de db.Base a db.Model
     id = db.Column(db.Integer, primary_key=True)
     empleado_id = db.Column(db.Integer, db.ForeignKey('empleado.id'), nullable=False)
     fecha_hora_entrada = db.Column(db.DateTime, nullable=False)
-    fecha_hora_salida = db.Column(db.DateTime, nullable=False)
+    fecha_hora_salida = db.Column(db.DateTime, nullable=True)
     tipo = db.Column(db.String, db.CheckConstraint("tipo IN ('Trabajo', 'Vacaciones', 'Ausencia', 'Baja')", name='check_tipo'), nullable=False)
 
     empleado = db.relationship('Empleado', backref=db.backref('registros', lazy=True))
