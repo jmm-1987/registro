@@ -1,171 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista de Empleados</title>
-  <!-- Incluir FontAwesome para los íconos -->
+
+  <!-- Íconos y fuentes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    /* Reset y estilos comunes */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #ffffff, #e3f2fd);
-      color: #2e3b4e;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    header {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .logo {
-      height: 80px;
-      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-    }
-    main {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      width: 100%;
-      max-width: 850px;
-      padding: 50px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.7rem;
-      margin-bottom: 40px;
-      color: #0066cc;
-      text-shadow: 0 0 6px rgba(0, 102, 204, 0.3);
-    }
-    table {
-      width: 100%;
-      margin-bottom: 20px;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      text-align: left;
-    }
-    th {
-      background: rgba(0, 102, 204, 0.8);
-      color: #fff;
-    }
-    tr:nth-child(even) {
-      background: rgba(0, 0, 0, 0.03);
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-    .btn {
-      padding: 14px 32px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background-color: #0066cc;
-      color: #fff;
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 12px rgba(0, 102, 204, 0.8);
-    }
-    /* Variantes de botones */
-    .btn-green {
-      background-color: #00c853;
-    }
-    .btn-green:hover {
-      background-color: #00e676;
-    }
-    .btn-blue {
-      background-color: #1e88e5;
-    }
-    .btn-blue:hover {
-      background-color: #42a5f5;
-    }
-    .btn-red {
-      background-color: #e53935;
-      padding: 10px 20px;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn-red:hover {
-      background-color: #ef5350;
-    }
-    .btn-red i {
-      margin-right: 8px;
-      font-size: 1.2rem;
-    }
-    /* Estilos para formularios modales (si se usan) */
-    .form-container {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      margin-top: 20px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS común -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header>
     <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
   </header>
+
   <main>
     <h1>Lista de Empleados</h1>
+
     <div class="buttons">
-      <!-- Botón para volver al inicio -->
       <form action="{{ url_for('index') }}" method="get">
         <button class="btn btn-blue" type="submit">
           <i class="fas fa-door-open"></i> Volver al Inicio
         </button>
       </form>
-      <!-- Botón para abrir el modal de crear empleado -->
       <button class="btn btn-green" id="openModalCrearEmpleado">
         <i class="fas fa-plus-circle"></i> Crear Empleado
       </button>
     </div>
-    <br>
+
     <table>
       <thead>
         <tr>
@@ -178,15 +43,19 @@
       </thead>
       <tbody>
         {% for empleado in empleados %}
-        <tr class="empleado-row" data-id="{{ empleado.id }}" data-nombre="{{ empleado.nombre_completo }}" data-alias="{{ empleado.alias }}" data-cargo="{{ empleado.cargo }}" data-sede="{{ empleado.sede }}">
+        <tr class="empleado-row"
+            data-id="{{ empleado.id }}"
+            data-nombre="{{ empleado.nombre_completo }}"
+            data-alias="{{ empleado.alias }}"
+            data-cargo="{{ empleado.cargo }}"
+            data-sede="{{ empleado.sede }}">
           <td>{{ empleado.alias }}</td>
           <td>{{ empleado.nombre_completo }}</td>
           <td>{{ empleado.cargo }}</td>
           <td>{{ empleado.sede }}</td>
           <td>
-            <!-- Enlace que redirige a la página de edición pasando el id del empleado -->
-            <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn btn-red">
-              <i class="fas fa-pencil-alt"></i>
+            <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn btn-green" title="Editar empleado">
+              <i class="fas fa-pen"></i> Editar
             </a>
           </td>
         </tr>
@@ -198,24 +67,14 @@
   {% include 'modal_crear_empleado.html' %}
 
   <script>
-    // Obtener el modal y los botones
-    var modalCrearEmpleado = document.getElementById('modal_crear_empleado');
-    var openModalCrearBtn = document.getElementById('openModalCrearEmpleado');
-    var closeModalCrearBtn = document.getElementById('closeModalCrearBtn');
+    const modalCrearEmpleado = document.getElementById('modal_crear_empleado');
+    const openModalCrearBtn = document.getElementById('openModalCrearEmpleado');
+    const closeModalCrearBtn = document.getElementById('closeModalCrearBtn');
 
-    // Abrir el modal
-    openModalCrearBtn.onclick = function() {
-      modalCrearEmpleado.style.display = "block";
-    }
-
-    // Cerrar el modal
-    closeModalCrearBtn.onclick = function() {
-      modalCrearEmpleado.style.display = "none";
-    }
-
-    // Cerrar el modal si el usuario hace clic fuera del modal
-    window.onclick = function(event) {
-      if (event.target == modalCrearEmpleado) {
+    openModalCrearBtn.onclick = () => modalCrearEmpleado.style.display = "block";
+    closeModalCrearBtn.onclick = () => modalCrearEmpleado.style.display = "none";
+    window.onclick = event => {
+      if (event.target === modalCrearEmpleado) {
         modalCrearEmpleado.style.display = "none";
       }
     }

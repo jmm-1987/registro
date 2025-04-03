@@ -1,0 +1,170 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f4f6f9, #e9eef5);
+  color: #2e3b4e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.logo {
+  height: 80px;
+}
+
+/* Main container */
+main {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 1000px;
+  padding: 40px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+h1 {
+  font-size: 2.3rem;
+  margin-bottom: 30px;
+  color: #1e2a36;
+  animation: fadeIn 1s forwards 0.4s;
+}
+
+/* Botones */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn i,
+.btn .icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+/* Botones por color */
+.btn-green {
+  background-color: #2e7d32;
+}
+
+.btn-green:hover {
+  background-color: #1b5e20;
+}
+
+.btn-blue {
+  background-color: #1565c0;
+}
+
+.btn-blue:hover {
+  background-color: #0d47a1;
+}
+
+.btn-red {
+  background-color: #c62828;
+}
+
+.btn-red:hover {
+  background-color: #b71c1c;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: fadeIn 1s ease forwards 0.5s;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+th {
+  background-color: #1565c0;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
