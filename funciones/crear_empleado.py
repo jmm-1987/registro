@@ -11,7 +11,7 @@ def ruta_crear_empleado(app):
     def crear_empleado():
         if request.method == 'POST':
             # Obtener datos del formulario
-            nombre = request.form['nombre_completo']
+            nombre = ""
             usuario = request.form['username']
             password = request.form['password']
             cargo = request.form['cargo']

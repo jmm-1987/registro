@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from models import db, Empleado, Registro  # Usamos Empleado directamente
@@ -33,8 +35,8 @@ with app.app_context():
 # Cargar el usuario por su ID (función requerida por Flask-Login)
 @login_manager.user_loader
 def load_user(user_id):
-    # No necesitamos cargar un usuario real para el acceso de "javier"
-    return None  # No devolvemos ningún usuario real, ya que no usamos la base de datos
+    return Empleado.query.get(int(user_id))
+
 
 # Ruta de login
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,34 +45,25 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # Login especial para "javier"
-        if username == "javier" and password == "javier":
-            class FakeUser:
-                id = 1
-                username = "javier"
-                is_authenticated = True
-                is_active = True
-                is_anonymous = False
-
-                def get_id(self):
-                    return str(self.id)
-
-            login_user(FakeUser())
-            return redirect(url_for('index'))
-
-        # Login normal con base de datos
         empleado = Empleado.query.filter_by(usuario=username).first()
 
         if empleado:
-            if empleado.check_password(password):  # ← CORRECTO
+            if empleado.check_password(password):
                 login_user(empleado)
-                return redirect(url_for('index'))
+
+                # 👇 Lógica para redirigir según el usuario
+                if empleado.usuario == "superuser":
+                    return redirect(url_for('index'))
+                else:
+                    return redirect(url_for('movil'))
+
             else:
                 flash('Contraseña incorrecta', 'error')
         else:
             flash('Nombre de usuario no encontrado', 'error')
 
     return render_template('login.html')
+
 
 
 # Ruta para cerrar sesión
@@ -80,12 +73,12 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/')
-#@login_required
+@login_required
 def index():
     return render_template('index.html')
 
 @app.route('/empleados')
-#@login_required
+@login_required
 def empleados():
     empleados_list = Empleado.query.all()  # Obtiene todos los empleados
     return render_template('empleados.html', empleados=empleados_list)
@@ -93,10 +86,39 @@ def empleados():
 @app.route('/consultar_horarios')
 @login_required
 def consultar_horarios():
-    empleados_list = Empleado.query.all()
-    registros = Registro.query.options(joinedload(Registro.empleado)).all()
-    return render_template('consultar_horarios.html', empleados=empleados_list, registros=registros)
+    # Obtener los filtros desde la URL
+    empleado_id = request.args.get('empleado_id', type=int)
+    fecha_desde = request.args.get('fecha_desde')
+    fecha_hasta = request.args.get('fecha_hasta')
 
+    # Iniciar la consulta base
+    query = Registro.query.options(joinedload(Registro.empleado))
+
+    # Aplicar filtros dinámicamente
+    if empleado_id:
+        query = query.filter(Registro.empleado_id == empleado_id)
+
+    if fecha_desde:
+        fecha_desde_dt = datetime.strptime(fecha_desde, '%Y-%m-%d')
+        query = query.filter(Registro.fecha_hora_entrada >= fecha_desde_dt)
+
+    if fecha_hasta:
+        fecha_hasta_dt = datetime.strptime(fecha_hasta, '%Y-%m-%d')
+        # Ajustar al final del día
+        fecha_hasta_dt = fecha_hasta_dt.replace(hour=23, minute=59, second=59)
+        query = query.filter(Registro.fecha_hora_entrada <= fecha_hasta_dt)
+
+    registros_filtrados = query.order_by(Registro.fecha_hora_entrada.desc()).all()
+
+    empleados = Empleado.query.all()
+
+    return render_template('consultar_horarios.html',
+        registros=registros_filtrados,
+        empleados=empleados,
+        filtro_empleado_id=empleado_id,
+        filtro_fecha_desde=fecha_desde,
+        filtro_fecha_hasta=fecha_hasta
+    )
 @app.route('/movil')
 @login_required
 def movil():

@@ -24,8 +24,12 @@ def ruta_editar_empleado(app):
             # Convertir la cadena de fecha a un objeto datetime.date
             fecha_alta_str = request.form['fecha_alta']
             fecha_alta = datetime.strptime(fecha_alta_str, '%Y-%m-%d').date()
-            fecha_baja_str = request.form['fecha_baja']
-            fecha_baja = datetime.strptime(fecha_baja_str, '%Y-%m-%d').date()
+            fecha_baja_str = request.form.get('fecha_baja', '')  # ya lo tienes
+
+            if fecha_baja_str:
+                fecha_baja = datetime.strptime(fecha_baja_str, '%Y-%m-%d').date()
+            else:
+                fecha_baja = None
 
             # Si es un POST, actualizamos el empleado con los datos del formulario
             empleado.dni = request.form['dni']

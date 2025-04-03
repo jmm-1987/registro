@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="funciona el registro">
+    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="nuevo login con hash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funciones/crear_empleado.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones/crear_empleado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/funciones/editar_empleado.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones/editar_empleado.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/consultar_horarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/consultar_horarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/empleados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/empleados.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/movil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,12 +135,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743076902064</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="nuevo login con hash">
+      <option name="closed" value="true" />
+      <created>1743670860776</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1743670860776</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="primero funciconando" />
     <MESSAGE value="funciona el registro" />
-    <option name="LAST_COMMIT_MESSAGE" value="funciona el registro" />
+    <MESSAGE value="nuevo login con hash" />
+    <option name="LAST_COMMIT_MESSAGE" value="nuevo login con hash" />
   </component>
 </project>

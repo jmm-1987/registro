@@ -1,207 +1,203 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Empleados</title>
-    <!-- Incluir FontAwesome para los íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f7f7f7;
-            color: #2e3b4e;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 50vh;
-            padding: 20px;
-        }
-
-        header {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            height: 100px;  /* Ajusta el tamaño del logo */
-        }
-
-        main {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            padding: 40px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: #1e2a36;
-        }
-
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: black;
-            color: white;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-
-        .btn:focus {
-            outline: none;
-        }
-
-        .form-container {
-            background-color: #fefefe;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .btn {
-        background-color: black;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.2rem;  /* Tamaño de fuente para el texto */
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Empleados</title>
+  <!-- Incluir FontAwesome para los íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    /* Reset y estilos comunes */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    .btn i {
-        font-size: 1.4rem; /* Ajuste del tamaño del ícono */
-        margin-right: 8px;  /* Espacio entre el ícono y el texto */
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #e3f2fd);
+      color: #2e3b4e;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
     }
-
+    header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo {
+      height: 80px;
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    }
+    main {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 850px;
+      padding: 50px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.7rem;
+      margin-bottom: 40px;
+      color: #0066cc;
+      text-shadow: 0 0 6px rgba(0, 102, 204, 0.3);
+    }
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+    th {
+      background: rgba(0, 102, 204, 0.8);
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.03);
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background-color: #0066cc;
+      color: #fff;
+    }
     .btn:hover {
-        background-color: #45a049;
-        transform: scale(1.05);
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0, 102, 204, 0.8);
     }
-
-    .btn:focus {
-        outline: none;
+    /* Variantes de botones */
+    .btn-green {
+      background-color: #00c853;
     }
-    </style>
+    .btn-green:hover {
+      background-color: #00e676;
+    }
+    .btn-blue {
+      background-color: #1e88e5;
+    }
+    .btn-blue:hover {
+      background-color: #42a5f5;
+    }
+    .btn-red {
+      background-color: #e53935;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-red:hover {
+      background-color: #ef5350;
+    }
+    .btn-red i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+    /* Estilos para formularios modales (si se usan) */
+    .form-container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      margin-top: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-    </header>
-    <main>
-        <h1>Lista de Empleados</h1>
-
-        <div class="buttons">
-    <!-- Botón para volver al inicio -->
-    <form action="{{ url_for('index') }}" method="get">
-        <button class="btn" type="submit">
-            <i class="fas fa-door-open"></i> Volver al Inicio
+  <header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+  </header>
+  <main>
+    <h1>Lista de Empleados</h1>
+    <div class="buttons">
+      <!-- Botón para volver al inicio -->
+      <form action="{{ url_for('index') }}" method="get">
+        <button class="btn btn-blue" type="submit">
+          <i class="fas fa-door-open"></i> Volver al Inicio
         </button>
-    </form>
-
-    <!-- Botón para abrir el modal de crear empleado -->
-    <button class="btn" id="openModalCrearEmpleado">
+      </form>
+      <!-- Botón para abrir el modal de crear empleado -->
+      <button class="btn btn-green" id="openModalCrearEmpleado">
         <i class="fas fa-plus-circle"></i> Crear Empleado
-    </button>
-</div>
-        </br>
-        <table>
-            <thead>
-                <tr>
-                    <th>Alias</th>
-                    <th>Nombre Completo</th>
-                    <th>Cargo</th>
-                    <th>Sede</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-    {% for empleado in empleados %}
-    <tr class="empleado-row" data-id="{{ empleado.id }}" data-nombre="{{ empleado.nombre_completo }}" data-alias="{{ empleado.alias }}" data-cargo="{{ empleado.cargo }}" data-sede="{{ empleado.sede }}">
-        <td>{{ empleado.alias }}</td>
-        <td>{{ empleado.nombre_completo }}</td>
-        <td>{{ empleado.cargo }}</td>
-        <td>{{ empleado.sede }}</td>
-        <td>
-                <!-- Enlace que redirige a la página de edición pasando el id del empleado -->
-                <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn">
-    <i class="fas fa-pencil-alt"></i> <!-- Ícono de lápiz de Font Awesome -->
-</a>
-            </td>
-    </tr>
-    {% endfor %}
-</tbody>
-        </table>
+      </button>
+    </div>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Alias</th>
+          <th>Nombre Completo</th>
+          <th>Cargo</th>
+          <th>Sede</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for empleado in empleados %}
+        <tr class="empleado-row" data-id="{{ empleado.id }}" data-nombre="{{ empleado.nombre_completo }}" data-alias="{{ empleado.alias }}" data-cargo="{{ empleado.cargo }}" data-sede="{{ empleado.sede }}">
+          <td>{{ empleado.alias }}</td>
+          <td>{{ empleado.nombre_completo }}</td>
+          <td>{{ empleado.cargo }}</td>
+          <td>{{ empleado.sede }}</td>
+          <td>
+            <!-- Enlace que redirige a la página de edición pasando el id del empleado -->
+            <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn btn-red">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
 
-    </main>
+  {% include 'modal_crear_empleado.html' %}
 
-    {% include 'modal_crear_empleado.html' %}
-
-    <script>
+  <script>
     // Obtener el modal y los botones
     var modalCrearEmpleado = document.getElementById('modal_crear_empleado');
     var openModalCrearBtn = document.getElementById('openModalCrearEmpleado');
@@ -209,20 +205,20 @@
 
     // Abrir el modal
     openModalCrearBtn.onclick = function() {
-        modalCrearEmpleado.style.display = "block";
+      modalCrearEmpleado.style.display = "block";
     }
 
     // Cerrar el modal
     closeModalCrearBtn.onclick = function() {
-        modalCrearEmpleado.style.display = "none";
+      modalCrearEmpleado.style.display = "none";
     }
 
     // Cerrar el modal si el usuario hace clic fuera del modal
     window.onclick = function(event) {
-        if (event.target == modalCrearEmpleado) {
-            modalCrearEmpleado.style.display = "none";
-        }
+      if (event.target == modalCrearEmpleado) {
+        modalCrearEmpleado.style.display = "none";
+      }
     }
-</script>
+  </script>
 </body>
 </html>
