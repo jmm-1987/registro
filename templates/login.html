@@ -91,6 +91,7 @@
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
     </header>
     <main>
+
         <h1>Iniciar Sesión</h1>
         <form action="{{ url_for('login') }}" method="post">
             <div class="input-group">
@@ -103,6 +104,13 @@
             </div>
             <button class="btn" type="submit">Iniciar Sesión</button>
         </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div style="color: red; margin-bottom: 15px;">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
     </main>
 </body>
 </html>

@@ -5,52 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 # Usamos una única instancia de SQLAlchemy
 db = SQLAlchemy()
 
-
-class Usuario(UserMixin, db.Model):
-    __tablename__ = 'usuario'
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-
-    # Métodos requeridos por Flask-Login:
-
-    def is_active(self):
-        return True  # Si deseas que todos los usuarios estén activos
-
-    def get_id(self):
-        return str(self.id)  # Asegúrate de devolver el id como cadena
-
-    def is_authenticated(self):
-        return True  # Si el usuario está autenticado, devuelve True
-
-    def is_anonymous(self):
-        return False  # Si el usuario no es anónimo, devuelve False
-
-    def check_password(self, password):
-        """Método para comprobar la contraseña del usuario."""
-        return check_password_hash(self.password, password)
-
-    # Método para crear un nuevo usuario
-    @staticmethod
-    def create_user(username, password):
-        hashed_password = generate_password_hash(password)
-        new_user = Usuario(username=username, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return new_user
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-
-class Empleado(db.Model):  # Cambiado de db.Base a db.Model
+class Empleado(UserMixin, db.Model):  # Modificamos el modelo Empleado para que herede UserMixin
     __tablename__ = "empleado"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     nombre = db.Column(db.String(100), nullable=False)
-    usuario = db.Column(db.String(10), nullable=False)
-    password = db.Column(db.String(10), nullable=False)
+    usuario = db.Column(db.String(10), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)  # Aseguramos que la contraseña sea suficientemente larga
     cargo = db.Column(db.String(30), nullable=False)
     alias = db.Column(db.String, nullable=False)
     nombre_completo = db.Column(db.String, nullable=False)
@@ -64,9 +24,36 @@ class Empleado(db.Model):  # Cambiado de db.Base a db.Model
     sabados = db.Column(db.Boolean, nullable=False)
     activo = db.Column(db.Boolean, nullable=False)
 
+    # Métodos requeridos por Flask-Login:
+
+    def is_active(self):
+        return self.activo  # Retorna si el empleado está activo
+
+    def get_id(self):
+        return str(self.id)  # Asegúrate de devolver el id como cadena
+
+    def is_authenticated(self):
+        return True  # Si el usuario está autenticado, devuelve True
+
+    def is_anonymous(self):
+        return False  # Si el usuario no es anónimo, devuelve False
+
+    def check_password(self, password):
+        """Método para comprobar la contraseña del empleado."""
+        return check_password_hash(self.password, password)
+
+    # Método para crear un nuevo empleado
+    @staticmethod
+    def create_empleado(usuario, password, **kwargs):
+        """Crear un nuevo empleado con contraseña hasheada."""
+        hashed_password = generate_password_hash(password)
+        new_empleado = Empleado(usuario=usuario, password=hashed_password, **kwargs)
+        db.session.add(new_empleado)
+        db.session.commit()
+        return new_empleado
 
 
-class Registro(db.Model):  # Cambiado de db.Base a db.Model
+class Registro(db.Model):
     __tablename__ = "registro"
     id = db.Column(db.Integer, primary_key=True)
     empleado_id = db.Column(db.Integer, db.ForeignKey('empleado.id'), nullable=False)
@@ -74,7 +61,6 @@ class Registro(db.Model):  # Cambiado de db.Base a db.Model
     fecha_hora_salida = db.Column(db.DateTime, nullable=True)
     tipo = db.Column(db.String, db.CheckConstraint("tipo IN ('Trabajo', 'Vacaciones', 'Ausencia', 'Baja')", name='check_tipo'), nullable=False)
 
-    #empleado = db.relationship('Empleado', backref=db.backref('registros', lazy=True))
     empleado = db.relationship('Empleado', backref='registros')
 
 
