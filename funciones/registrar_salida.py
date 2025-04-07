@@ -1,7 +1,10 @@
+import pytz
 from flask import request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from datetime import datetime
 from models import db, Registro
+
+madrid = pytz.timezone('Europe/Madrid')
 
 def ruta_registrar_salida(app):
     @app.route('/registrar_salida', methods=['POST'])
@@ -19,7 +22,7 @@ def ruta_registrar_salida(app):
                 return redirect(url_for('movil'))
 
             # Registrar hora de salida
-            registro.fecha_hora_salida = datetime.now()
+            registro.fecha_hora_salida = datetime.now(madrid)
             db.session.commit()
             flash('✅ Salida registrada correctamente.', 'success')
 

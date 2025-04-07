@@ -1,8 +1,11 @@
+import pytz
 from flask import redirect, url_for, request, flash
 from flask_login import current_user, login_required
 from datetime import datetime
 from models import db, Registro
 
+
+madrid = pytz.timezone('Europe/Madrid')
 def ruta_registrar_entrada(app):
     @app.route('/registrar_entrada', methods=['POST'])
     @login_required
@@ -14,7 +17,7 @@ def ruta_registrar_entrada(app):
         try:
             nuevo_registro = Registro(
                 empleado_id=current_user.id,
-                fecha_hora_entrada=datetime.now().isoformat(),
+                fecha_hora_entrada=datetime.now(madrid),
                 tipo=tipo
             )
 
