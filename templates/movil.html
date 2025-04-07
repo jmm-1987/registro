@@ -184,23 +184,23 @@
   <!-- Contador en tiempo real -->
   {% if hora_entrada %}
     <script>
-      const entrada = new Date("{{ hora_entrada }}");
-      const contador = document.getElementById('contador');
+  const entrada = new Date("{{ hora_entrada }}");
+  const contador = document.getElementById('contador');
 
-      function actualizarContador() {
-        const ahora = new Date();
-        const diff = ahora - entrada;
+  function actualizarContador() {
+    const ahora = new Date();
+    const diff = ahora.getTime() - entrada.getTime(); // diferencia en milisegundos
 
-        const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-        const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-        const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+    const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+    const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+    const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
 
-        contador.textContent = `${horas}:${minutos}:${segundos}`;
-    }
+    contador.textContent = `${horas}:${minutos}:${segundos}`;
+  }
 
-      setInterval(actualizarContador, 1000);
-      actualizarContador();
-    </script>
+  setInterval(actualizarContador, 1000);
+  actualizarContador();
+</script>
   {% endif %}
 </body>
 </html>
