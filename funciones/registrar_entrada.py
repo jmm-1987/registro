@@ -14,7 +14,7 @@ def ruta_registrar_entrada(app):
         try:
             nuevo_registro = Registro(
                 empleado_id=current_user.id,
-                fecha_hora_entrada=datetime.now(),
+                fecha_hora_entrada=datetime.now().isoformat(),
                 tipo=tipo
             )
 
