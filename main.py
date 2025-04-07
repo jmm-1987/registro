@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from models import db, Empleado, Registro  # Usamos Empleado directamente
@@ -8,6 +7,7 @@ from funciones.editar_empleado import ruta_editar_empleado
 from funciones.registrar_entrada import ruta_registrar_entrada
 from funciones.registrar_salida import ruta_registrar_salida
 from sqlalchemy.orm import joinedload
+from sqlalchemy import distinct
 
 app = Flask(__name__)
 
@@ -110,7 +110,11 @@ def consultar_horarios():
 
     registros_filtrados = query.order_by(Registro.fecha_hora_entrada.desc()).all()
 
-    empleados = Empleado.query.all()
+    # Subconsulta de IDs de empleados con registros en el rango filtrado
+    empleados_ids_con_registros = query.with_entities(distinct(Registro.empleado_id)).subquery()
+
+    # Obtener los empleados que coincidan con esos IDs
+    empleados = Empleado.query.filter(Empleado.id.in_(empleados_ids_con_registros)).all()
 
     return render_template('consultar_horarios.html',
         registros=registros_filtrados,

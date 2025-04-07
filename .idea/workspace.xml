@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="nuevo login con hash">
-      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/consultar_horarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/consultar_horarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/editar_empleado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/editar_empleado.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/empleados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/empleados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/modal_crear_empleado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modal_crear_empleado.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743675113900</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="nuevo login con hash">
+      <option name="closed" value="true" />
+      <created>1743678285791</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1743678285791</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

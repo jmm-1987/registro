@@ -168,3 +168,86 @@ tr:nth-child(even) {
     opacity: 1;
   }
 }
+    /* Estilo para el modal */
+    .modal {
+        display: none; /* Inicialmente oculto */
+        position: fixed; /* Fija en la pantalla */
+        z-index: 1; /* Asegura que esté por encima de otros elementos */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Hacer scroll si es necesario */
+        background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
+        padding-top: 60px; /* Espacio de arriba */
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .form-group {
+        flex: 1 1 45%; /* Establece que cada input ocupe un 45% del espacio */
+        min-width: 200px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 3px;
+        color: #555;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+        color: #333;
+    }
+
+    .form-group input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+    }

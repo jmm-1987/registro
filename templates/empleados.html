@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista de Empleados</title>
 
-  <!-- Íconos y fuentes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- CSS común -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
   <header>
@@ -54,7 +52,7 @@
           <td>{{ empleado.cargo }}</td>
           <td>{{ empleado.sede }}</td>
           <td>
-            <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn btn-green" title="Editar empleado">
+            <a href="{{ url_for('editar_empleado', id=empleado.id) }}" class="btn btn-blue" title="Editar empleado">
               <i class="fas fa-pen"></i> Editar
             </a>
           </td>
