@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="primera prueba">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funciones/registrar_entrada.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones/registrar_entrada.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funciones/registrar_salida.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones/registrar_salida.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/registro.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/registro.db" afterDir="false" />
+    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="primera prueba. ojo horarios">
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744020462019</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="primera prueba. ojo horarios">
+      <option name="closed" value="true" />
+      <created>1744021550262</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1744021550262</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -240,6 +244,7 @@
     <MESSAGE value="funciona el registro" />
     <MESSAGE value="nuevo login con hash" />
     <MESSAGE value="primera prueba" />
-    <option name="LAST_COMMIT_MESSAGE" value="primera prueba" />
+    <MESSAGE value="primera prueba. ojo horarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="primera prueba. ojo horarios" />
   </component>
 </project>
