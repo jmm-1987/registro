@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -237,82 +237,66 @@
   </div>
 
   <!-- Flash autohide -->
-  <script>
+<script>
+  // 🔔 Pedir permiso de notificación apenas carga el script
+  if (Notification.permission !== 'granted') {
+    Notification.requestPermission();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ✨ Ocultar mensajes flash después de 3 segundos
     setTimeout(() => {
       const flashes = document.querySelectorAll('.flash');
       flashes.forEach(flash => flash.style.display = 'none');
     }, 3000);
 
-    // Mostrar y ocultar el formulario de registro manual
-    function abrirFormulario() {
+    // 📋 Mostrar y ocultar el formulario de registro manual
+    window.abrirFormulario = function () {
       document.getElementById('formularioRegistro').style.display = 'flex';
-    }
+    };
 
-    function cerrarFormulario() {
+    window.cerrarFormulario = function () {
       document.getElementById('formularioRegistro').style.display = 'none';
-    }
-  </script>
+    };
 
-  // Verifica permisos al cargar
-  if (Notification.permission !== 'granted') {
-    Notification.requestPermission();
-  }
+    // ⏱️ Contador en tiempo real y notificación si hay entrada
+    {% if hora_entrada %}
+    const entrada = new Date("{{ hora_entrada }}");
+    const contador = document.getElementById('contador');
+    let notificacionEnviada = false;
 
-  <!-- Contador en tiempo real -->
-  {% if hora_entrada %}
-    <script>
-      const entrada = new Date("{{ hora_entrada }}");
-      const contador = document.getElementById('contador');
-
-      function actualizarContador() {
-        const ahora = new Date();
-        const diff = ahora.getTime() - entrada.getTime(); // diferencia en milisegundos
-
-        const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-        const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-        const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-
-        contador.textContent = `${horas}:${minutos}:${segundos}`;
+    function enviarNotificacion() {
+      if (Notification.permission === 'granted' && !notificacionEnviada) {
+        new Notification("¡Hora de cerrar jornada!", {
+          body: "Llevas más de 1 minuto trabajando. No olvides registrar tu salida.",
+          icon: "{{ url_for('static', filename='logo.png') }}"
+        });
+        notificacionEnviada = true;
       }
-
-      setInterval(actualizarContador, 1000);
-      actualizarContador();
-    </script>
-  {% endif %}
-
-//notificación
-
-const entrada = new Date("{{ hora_entrada }}");
-  const contador = document.getElementById('contador');
-  let notificacionEnviada = false;
-
-  function enviarNotificacion() {
-    if (Notification.permission === 'granted' && !notificacionEnviada) {
-      new Notification("¡Hora de cerrar jornada!", {
-        body: "Llevas más de 8 horas trabajando. No olvides registrar tu salida.",
-        icon: "{{ url_for('static', filename='logo.png') }}"
-      });
-      notificacionEnviada = true;
     }
-  }
 
-  function actualizarContador() {
-    const ahora = new Date();
-    const diff = ahora.getTime() - entrada.getTime(); // diferencia en milisegundos
+    function actualizarContador() {
+      const ahora = new Date();
+      const diff = ahora.getTime() - entrada.getTime();
 
-    const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-    const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-    const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+      const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+      const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+      const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
 
-    contador.textContent = `${horas}:${minutos}:${segundos}`;
+      contador.textContent = `${horas}:${minutos}:${segundos}`;
 
-    // Si pasaron más de 8 horas (28800000 milisegundos), avisar
-    if (diff > 8 * 60 * 60 * 1000) {
-      enviarNotificacion();
+      if (diff > 1 * 60 * 1000) {
+        enviarNotificacion();
+      }
     }
-  }
 
-  setInterval(actualizarContador, 1000);
-  actualizarContador();
+    setInterval(actualizarContador, 1000);
+    actualizarContador();
+    {% endif %}
+  });
+</script>
+
+
+
 </body>
 </html>

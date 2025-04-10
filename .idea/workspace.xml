@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="primera prueba. ojo horarios">
-      <change afterPath="$PROJECT_DIR$/funciones/registrar_manual.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/movilcopia.html" afterDir="false" />
+    <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="notificación">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/registro.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/registro.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/movil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744021660097</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="notificación">
+      <option name="closed" value="true" />
+      <created>1744277308173</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1744277308173</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -259,6 +264,7 @@
     <MESSAGE value="nuevo login con hash" />
     <MESSAGE value="primera prueba" />
     <MESSAGE value="primera prueba. ojo horarios" />
-    <option name="LAST_COMMIT_MESSAGE" value="primera prueba. ojo horarios" />
+    <MESSAGE value="notificación" />
+    <option name="LAST_COMMIT_MESSAGE" value="notificación" />
   </component>
 </project>
