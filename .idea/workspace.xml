@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc818929-007e-45b0-87fc-6958c4256d69" name="Changes" comment="primera prueba. ojo horarios">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/funciones/registrar_manual.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/movilcopia.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/registro.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/registro.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/movil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +52,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\JonyPc\PycharmProjects\registro_horario\funciones" />
+      <recent name="C:\Users\JonyPc\PycharmProjects\registro_horario\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\JonyPc\PycharmProjects\registro_horario\static\css" />
@@ -236,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744021550262</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="primera prueba. ojo horarios">
+      <option name="closed" value="true" />
+      <created>1744021660097</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1744021660097</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

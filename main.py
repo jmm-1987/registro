@@ -8,6 +8,7 @@ from funciones.registrar_entrada import ruta_registrar_entrada
 from funciones.registrar_salida import ruta_registrar_salida
 from sqlalchemy.orm import joinedload
 from sqlalchemy import distinct
+from funciones.registrar_manual import ruta_registrar_manual
 
 app = Flask(__name__)
 
@@ -27,6 +28,7 @@ ruta_crear_empleado(app)
 ruta_editar_empleado(app)
 ruta_registrar_entrada(app)
 ruta_registrar_salida(app)
+ruta_registrar_manual(app)
 
 # Crear las tablas antes de iniciar la aplicación (manual)
 with app.app_context():

@@ -132,54 +132,6 @@
       color: #721c24;
       border: 1px solid #f5c6cb;
     }
-
-    /* Estilos del formulario de registro manual */
-    .form-container {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .form-container input {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 8px;
-      width: 100%;
-      border: 1px solid #ccc;
-    }
-
-    .form-container button {
-      width: 100%;
-      max-width: 150px;
-      margin-top: 10px;
-    }
-
-    .form-container .btn-cancel {
-      background-color: #f44336;
-    }
-
-    .form-container .btn-cancel:hover {
-      background-color: #d32f2f;
-    }
-
-    .form-container .btn-submit {
-      background-color: #4CAF50;
-    }
-
-    .form-container .btn-submit:hover {
-      background-color: #45a049;
-    }
   </style>
 </head>
 <body>
@@ -212,28 +164,13 @@
     </div>
 
     <footer>
-      <button type="button" class="btn btn-manual" onclick="abrirFormulario()">Registro Manual</button>
+      <form action="{{ url_for('logout') }}" method="get">
+        <button type="submit" class="btn btn-manual">Registro Manual</button>
+      </form>
       <form action="{{ url_for('logout') }}" method="post" style="margin-top: 20px;">
         <button class="btn" type="submit">Cerrar Sesión</button>
       </form>
     </footer>
-  </div>
-
-  <!-- Formulario de Registro Manual -->
-  <div class="form-container" id="formularioRegistro">
-    <form action="{{ url_for('registrar_manual') }}" method="post">
-      <label for="fecha">Fecha:</label>
-      <input type="date" id="fecha" name="fecha" required>
-
-      <label for="hora_entrada">Hora de Entrada:</label>
-      <input type="time" id="hora_entrada" name="hora_entrada" required>
-
-      <label for="hora_salida">Hora de Salida:</label>
-      <input type="time" id="hora_salida" name="hora_salida" required>
-
-      <button type="submit" class="btn btn-submit">Registrar</button>
-      <button type="button" class="btn btn-cancel" onclick="cerrarFormulario()">Cancelar</button>
-    </form>
   </div>
 
   <!-- Flash autohide -->
@@ -242,59 +179,13 @@
       const flashes = document.querySelectorAll('.flash');
       flashes.forEach(flash => flash.style.display = 'none');
     }, 3000);
-
-    // Mostrar y ocultar el formulario de registro manual
-    function abrirFormulario() {
-      document.getElementById('formularioRegistro').style.display = 'flex';
-    }
-
-    function cerrarFormulario() {
-      document.getElementById('formularioRegistro').style.display = 'none';
-    }
   </script>
-
-  // Verifica permisos al cargar
-  if (Notification.permission !== 'granted') {
-    Notification.requestPermission();
-  }
 
   <!-- Contador en tiempo real -->
   {% if hora_entrada %}
     <script>
-      const entrada = new Date("{{ hora_entrada }}");
-      const contador = document.getElementById('contador');
-
-      function actualizarContador() {
-        const ahora = new Date();
-        const diff = ahora.getTime() - entrada.getTime(); // diferencia en milisegundos
-
-        const horas = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-        const minutos = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-        const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-
-        contador.textContent = `${horas}:${minutos}:${segundos}`;
-      }
-
-      setInterval(actualizarContador, 1000);
-      actualizarContador();
-    </script>
-  {% endif %}
-
-//notificación
-
-const entrada = new Date("{{ hora_entrada }}");
+  const entrada = new Date("{{ hora_entrada }}");
   const contador = document.getElementById('contador');
-  let notificacionEnviada = false;
-
-  function enviarNotificacion() {
-    if (Notification.permission === 'granted' && !notificacionEnviada) {
-      new Notification("¡Hora de cerrar jornada!", {
-        body: "Llevas más de 8 horas trabajando. No olvides registrar tu salida.",
-        icon: "{{ url_for('static', filename='logo.png') }}"
-      });
-      notificacionEnviada = true;
-    }
-  }
 
   function actualizarContador() {
     const ahora = new Date();
@@ -305,14 +196,11 @@ const entrada = new Date("{{ hora_entrada }}");
     const segundos = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
 
     contador.textContent = `${horas}:${minutos}:${segundos}`;
-
-    // Si pasaron más de 8 horas (28800000 milisegundos), avisar
-    if (diff > 8 * 60 * 60 * 1000) {
-      enviarNotificacion();
-    }
   }
 
   setInterval(actualizarContador, 1000);
   actualizarContador();
+</script>
+  {% endif %}
 </body>
 </html>
